@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Disciplinary Issue</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<button class="back-btn" onclick="location.href='personnel-home.html'">
+  ← Return to Home
+</button>
+
+<h2>Disciplinary Issue</h2>
+
+<form onsubmit="submitIssue(event)">
+    <!-- SUBJECT DROPDOWN -->
+  <select required>
+    <option value="" disabled selected>Select Student Level</option>
+    <option>Grade School Level</option>
+    <option>High School Level</option>
+    <option>Senior High School Level</option>
+  <input placeholder="First Name" required>
+  <input placeholder="Last Name" required>
+  <input type="email" placeholder="Email" required>
+  <input type="file">
+  <textarea placeholder="Explain your Issue" required></textarea>
+
+  <button type="submit">Submit</button>
+</form>
+
+<script src="script.js"></script>
+</body>
+</html>

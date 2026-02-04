@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<button class="back-btn" onclick="goToAdminLogin()">← Back to Login</button>
+<button class="back-btn" onclick="goToIndex()">← Back to Home Login</button>
+
+<h1>Admin Assignment Panel</h1>
+
+<form>
+<h2>Academic Assignments</h2>
+  <h3>English</h3>
+  <input placeholder="Full Name">
+  <input type="email" placeholder="Official Email">
+
+  <h3>Araling Panlipunan</h3>
+    <input placeholder="Full Name">
+  <input type="email" placeholder="Official Email">
+
+  <h3>Mathematics</h3>
+    <input placeholder="Full Name">
+  <input type="email" placeholder="Official Email">
+
+  <h3>Science</h3>
+    <input placeholder="Full Name">
+  <input type="email" placeholder="Official Email">
+
+  <h3>Filipino</h3>
+    <input placeholder="Full Name">
+  <input type="email" placeholder="Official Email">
+
+  <h3>Technology and Livelihood Education</h3>
+   <input placeholder="Full Name">
+  <input type="email" placeholder="Official Email">
+
+  <h3>Reading</h3>
+    <input placeholder="Full Name">
+  <input type="email" placeholder="Official Email">
+
+  <h3>MAPEH</h3>
+    <input placeholder="Full Name">
+  <input type="email" placeholder="Official Email">
+
+  <h3>Christian Living and Values Education</h3>
+    <input placeholder="Full Name">
+  <input type="email" placeholder="Official Email">
+
+  <h2>Human Resources</h2>
+  <input placeholder="Full Name">
+  <input type="email" placeholder="Official Email">
+
+<h2>Grade School Library</h2>
+  <input placeholder="Full Name">
+  <input type="email" placeholder="Official Email">
+<h2>High School and Senior High School Library</h2>
+  <input placeholder="Full Name">
+  <input type="email" placeholder="Official Email">
+<h2>Laboratory</h2>
+  <input placeholder="Full Name">
+  <input type="email" placeholder="Official Email">
+<h2>Cashier</h2>
+  <input placeholder="Full Name">
+  <input type="email" placeholder="Official Email">
+<h2>Registrar</h2>
+  <input placeholder="Full Name">
+  <input type="email" placeholder="Official Email">
+<h2>Guidance Office</h2>
+  <input placeholder="Full Name">
+  <input type="email" placeholder="Official Email">
+  <h2>School Clinic</h2>
+  <input placeholder="Full Name">
+  <input type="email" placeholder="Official Email">
+  <h2>School Canteen</h2>
+  <input placeholder="Full Name">
+  <input type="email" placeholder="Official Email">
+  <h2>Safety and Structural (2 Personnel)</h2>
+  <h3>Disaster Risk Reduction Management Office</h3>
+  <input placeholder="Full Name">
+  <input type="email" placeholder="Official Email">
+<h3>General Services</h3>
+  <input placeholder="Full Name">
+  <input type="email" placeholder="Official Email">
+
+  <h2>Disciplinary</h2>
+  <h3>Grade School</h3>
+  <input placeholder="Full Name">
+  <input type="email" placeholder="Official Email">
+<h3>High School</h3>
+    <input placeholder="Full Name">
+  <input type="email" placeholder="Official Email">
+<h3>Senior High School</h3>
+    <input placeholder="Full Name">
+  <input type="email" placeholder="Official Email">
+
+  <button type="submit">Save Assignments</button>
+</form>
+
+<script src="script.js"></script>
+
+<script type="module" src="firebase.js"></script>
+<script type="module" src="auth.js"></script>
+
+<script type="module">
+  import { protectPage } from "./auth.js";
+  protectPage(["admin"]);
+</script>
+
+
+</body>
+</html>
+

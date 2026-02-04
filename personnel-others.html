@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Other Issues</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<button class="back-btn" onclick="location.href='personnel-home.html'">
+  ← Return to Home
+</button>
+
+<h2>Other Issues</h2>
+
+<form onsubmit="submitIssue(event)">
+  <input placeholder="First Name" required>
+  <input placeholder="Last Name" required>
+  <input type="email" placeholder="Email" required>
+  <input type="file">
+  <textarea placeholder="Explain your Issue" required></textarea>
+
+  <button type="submit">Submit</button>
+</form>
+
+<script src="script.js"></script>
+</body>
+</html>

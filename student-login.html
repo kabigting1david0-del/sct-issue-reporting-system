@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<button class="back-btn" onclick="goToIndex()">← Back to Role Selection</button>
+
+<h2>Student Login</h2>
+
+<form onsubmit="loginStudent(event)">
+  <input type="email" id="email" placeholder="Email" required>
+  <input type="password" id="password" placeholder="Password" required>
+  <button type="submit">Login</button>
+</form>
+
+<script type="module" src="firebase.js"></script>
+<script type="module" src="auth.js"></script>
+
+<script src="script.js"></script>
+</body>
+</html>

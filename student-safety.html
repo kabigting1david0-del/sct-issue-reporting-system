@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Safety & Structural</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<button class="back-btn" onclick="location.href='student-home.html'">
+  ← Return to Home
+</button>
+
+<h2>Safety and Structural Issue</h2>
+
+<form onsubmit="submitIssue(event)">
+  
+  <input placeholder="First Name" required>
+  <input placeholder="Last Name" required>
+  <input placeholder="Location" required>
+  <input placeholder="Room Number (Optional)">
+  <input type="file">
+  <textarea placeholder="Explain your issue" required></textarea>
+
+  <button type="submit">Submit</button>
+</form>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Human Resources</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<button class="back-btn" onclick="location.href='personnel-home.html'">
+  ← Return to Home
+</button>
+
+<h2>Human Resources</h2>
+
+<form onsubmit="submitIssue(event)">
+ <!-- SUBJECT DROPDOWN -->
+  <select required>
+    <option value="" disabled selected>Select Subject</option>
+    <option>English</option>
+    <option>Science</option>
+    <option>Math</option>
+    <option>Araling Panlipunan</option>
+    <option>Filipino</option>
+    <option>Technology and Livelihood Education</option>
+    <option>Reading</option>
+    <option>MAPEH</option>
+  </select>
+  <input placeholder="First Name" required>
+  <input placeholder="Last Name" required>
+  <input type="email" placeholder="School Email" required>
+  <input placeholder="Subject of Issue" required>
+  <input type="file" accept="image/*,.pdf">
+  <textarea placeholder="Explain your Issue" required></textarea>
+
+  <button type="submit">Submit</button>
+</form>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Services and Facilities</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<button class="back-btn" onclick="location.href='personnel-home.html'">
+  ← Return to Home
+</button>
+
+<h2>Services and Facilities</h2>
+
+<form onsubmit="submitIssue(event)">
+    <!-- SUBJECT DROPDOWN -->
+  <select required>
+    <option value="" disabled selected>Select Services or Facilities</option>
+    <option>Grade School Library</option>
+    <option>High School Library</option>
+    <option>Senior High School Library</option>
+    <option>Grade School Laboratory</option>
+    <option>Biology Laboratory</option>
+    <option>Chemistry Laboratory</option>
+    <option>Physics Laboratory</option>
+    <option>Computer Laboratory</option>
+    <option>School Clinic</option>
+    <option>School Canteen</option>
+  <input placeholder="LRN" required>
+  <input placeholder="First Name" required>
+  <input placeholder="Last Name" required>
+  <input type="email" placeholder="Email" required>
+  <input type="file" placeholder="Attach File" required>
+  <textarea placeholder="Explain your Issue" required></textarea>
+
+  <button type="submit">Submit</button>
+</form>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<button class="back-btn" onclick="goToStudentLogin()">← Back to Login</button>
+<button class="back-btn" onclick="goToIndex()">← Back to Home Login</button>
+
+<h1>Student</h1>
+
+<div class="options">
+  <a href="student-academic.html">Academics</a>
+  <a href="student-safety.html">Safety and Structural</a>
+  <a href="student-disciplinary.html">Disciplinary</a>
+  <a href="student-services-and-facilities.html">Services and Facilities</a>
+  <a href="student-others.html">Others</a>
+</div>
+
+<script src="script.js"></script>
+
+<script type="module" src="firebase.js"></script>
+<script type="module" src="auth.js"></script>
+
+<script type="module">
+  import { protectPage } from "./auth.js";
+  protectPage(["personnel"]);
+</script>
+
+
+</body>
+</html>

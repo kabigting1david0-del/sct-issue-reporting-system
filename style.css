@@ -1,0 +1,52 @@
+body {
+  font-family: 'Roboto', Times, serif;
+  background: linear-gradient(to right, #ffcc00, #ff9900);
+  padding: 30px;
+  text-align: center;
+}
+
+.role-container, .options {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.role-card, .options a, .category {
+  display: block;
+  background: white;
+  padding: 20px;
+  width: 300px;
+  border-radius: 15px;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+  margin: 10px;
+}
+
+input, textarea, button {
+  display: block;
+  margin: 10px auto;
+  width: 300px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+button {
+  background: orange;
+  border: 1px solid rgb(255, 174, 53);
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.back-btn {
+  background: white;
+  color: orange;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 15px;
+}

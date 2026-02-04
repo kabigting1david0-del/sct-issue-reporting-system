@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Academic Issue</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<button class="back-btn" onclick="location.href='student-home.html'">
+  ← Return to Home
+</button>
+
+<h2>Academic Issue Report</h2>
+
+<form onsubmit="submitIssue(event)">
+
+  <!-- SUBJECT DROPDOWN -->
+  <select required>
+    <option value="" disabled selected>Select Grade Level</option>
+    <option>Grade 7</option>
+    <option>Grade 8</option>
+    <option>Grade 9</option>
+    <option>Grade 10</option>
+    <option>Grade 11</option>
+    <option>Grade 12</option>
+  </select>
+  <input type="text" placeholder="First Name" required>
+  <input type="text" placeholder="Last Name" required>
+  <input type="email" placeholder="School Email" required>
+
+  <!-- SUBJECT DROPDOWN -->
+  <select required>
+    <option value="" disabled selected>Select Subject</option>
+    <option>English</option>
+    <option>Science</option>
+    <option>Math</option>
+    <option>Araling Panlipunan</option>
+    <option>Filipino</option>
+    <option>Technology and Livelihood Education</option>
+    <option>Reading</option>
+    <option>MAPEH</option>
+    <option>Christian Living and Values Education</option>
+  </select>
+
+  <input type="file" accept=".jpg,.png,.pdf">
+  <textarea placeholder="Explain your issue" required></textarea>
+
+  <button type="submit">Submit</button>
+</form>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Personnel Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<button class="back-btn" onclick="goToPersonnelLogin()">← Back to Login</button>
+<button class="back-btn" onclick="goToIndex()">← Back to Home Login</button>
+
+<h1>Personnel</h1>
+
+<div class="options">
+  <a href="personnel-human-resources.html">Human Resources</a>
+  <a href="personnel-safety.html">Safety and Structural</a>
+  <a href="personnel-disciplinary.html">Disciplinary</a>
+  <a href="personnel-services-and-facilities.html">Services and Facilities</a>
+  <a href="personnel-others.html">Others</a>
+</div>
+
+<script src="script.js"></script>
+
+<script type="module" src="firebase.js"></script>
+<script type="module" src="auth.js"></script>
+
+
+<script type="module">
+  import { protectPage } from "./auth.js";
+  protectPage(["personnel"]);
+</script>
+
+</body>
+</html>

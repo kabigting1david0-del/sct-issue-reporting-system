@@ -74,3 +74,45 @@ function goToIndex() {
   window.location.href = "index.html";
 }
 
+
+import { db } from "./firebase.js";
+import { doc, getDoc } from 
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getStorage, ref, uploadBytes, getDownloadURL } 
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
+
+function submitIssue(event) {
+  event.preventDefault();
+
+  const category = document.getElementById("service").value.toLowerCase();
+  const firstName = document.getElementById("firstName").value;
+  const lastName = document.getElementById("lastName").value;
+  const email = document.getElementById("email").value;
+  const message = document.getElementById("message").value;
+  const file = document.getElementById("file").files[0];
+
+  const storage = getStorage();
+  const fileRef = ref(storage, `issues/${Date.now()}_${file.name}`);
+
+  uploadBytes(fileRef, file)
+    .then(() => getDownloadURL(fileRef))
+    .then(url => {
+      return getDoc(doc(db, "assignments", category)).then(docSnap => {
+        if (!docSnap.exists()) throw "No assignment found";
+
+        return emailjs.send("SERVICE_ID", "TEMPLATE_ID", {
+          to_email: docSnap.data().email,
+          category: category,
+          first_name: firstName,
+          last_name: lastName,
+          email: email,
+          message: message,
+          file_url: url
+        });
+      });
+    })
+    .then(() => {
+      window.location.href = "personnel-thankyou.html";
+    })
+    .catch(err => alert(err));
+}

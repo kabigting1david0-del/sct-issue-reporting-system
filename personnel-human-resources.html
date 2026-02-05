@@ -25,13 +25,12 @@
     <option>Reading</option>
     <option>MAPEH</option>
   </select>
-  <input placeholder="First Name" required>
-  <input placeholder="Last Name" required>
-  <input type="email" placeholder="School Email" required>
-  <input placeholder="Subject of Issue" required>
-  <input type="file" accept="image/*,.pdf">
-  <textarea placeholder="Explain your Issue" required></textarea>
-
+  <input id ="firstname" type="text" placeholder="First Name" required>
+  <input id ="lastname" type="text" placeholder="Last Name" required>
+  <input id ="email" type="email" placeholder="Email" required>
+  <input id ="file" type="file">
+  <textarea id="message" placeholder="Explain your Issue" required></textarea>
+  
   <button type="submit">Submit</button>
 </form>
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
@@ -39,6 +38,8 @@
   emailjs.init("xjCLN6pfkwHRa0yIu");
 </script>
 <script src="script.js"></script>
+  
 </body>
 </html>
+
 

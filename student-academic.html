@@ -12,41 +12,30 @@
 
 <h2>Academic Issue Report</h2>
 
-<form onsubmit="submitIssue(event)">
+<form onsubmit="submitAcademicIssue(event)">
 
-  <!-- SUBJECT DROPDOWN -->
-  <select required>
-    <option value="" disabled selected>Select Grade Level</option>
-    <option>Grade 7</option>
-    <option>Grade 8</option>
-    <option>Grade 9</option>
-    <option>Grade 10</option>
-    <option>Grade 11</option>
-    <option>Grade 12</option>
-  </select>
-  <input type="text" placeholder="First Name" required>
-  <input type="text" placeholder="Last Name" required>
-  <input type="email" placeholder="School Email" required>
+  <input id="firstName" required placeholder="First Name">
+  <input id="lastName" required placeholder="Last Name">
+  <input id="email" type="email" required placeholder="School Email">
 
-  <!-- SUBJECT DROPDOWN -->
-  <select required>
-    <option value="" disabled selected>Select Subject</option>
-    <option>English</option>
-    <option>Science</option>
-    <option>Math</option>
-    <option>Araling Panlipunan</option>
-    <option>Filipino</option>
-    <option>Technology and Livelihood Education</option>
-    <option>Reading</option>
-    <option>MAPEH</option>
-    <option>Christian Living and Values Education</option>
+  <select id="subject" required>
+    <option value="">Select Subject</option>
+    <option value="english">English</option>
+    <option value="araling_panlipunan">Araling Panlipunan</option>
+    <option value="mathematics">Mathematics</option>
+    <option value="science">Science</option>
+    <option value="filipino">Filipino</option>
+    <option value="tle">Technology and Livelihood Education</option>
+    <option value="reading">Reading</option>
+    <option value="mapeh">MAPEH</option>
+    <option value="clve">Christian Living and Values Education</option>
   </select>
 
-  <input type="file" accept=".jpg,.png,.pdf">
-  <textarea placeholder="Explain your issue" required></textarea>
+  <textarea id="message" required placeholder="Express your concern"></textarea>
 
   <button type="submit">Submit</button>
 </form>
+
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 <script>
   emailjs.init("xjCLN6pfkwHRa0yIu");
@@ -54,4 +43,5 @@
 <script src="script.js"></script>
 </body>
 </html>
+
 

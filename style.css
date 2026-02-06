@@ -68,7 +68,7 @@ button {
 
 
 .back-btn:hover {
-  background-color: #1a252f;
+  background-color: #ed7117;
   transform: translateY(-2px);
 }
 
@@ -77,3 +77,4 @@ button {
   outline: none;
   box-shadow: 0 0 0 3px rgba(44, 62, 80, 0.4);
 }
+

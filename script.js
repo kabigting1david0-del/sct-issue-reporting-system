@@ -117,7 +117,7 @@ function submitIssue(event) {
       return getDoc(doc(db, "assignments", category)).then(docSnap => {
         if (!docSnap.exists()) throw "No assignment found";
 
-        return emailjs.send("SERVICE_ID", "TEMPLATE_ID", {
+        return emailjs.send("service_9uy34u8", "template_0vqldng", {
           to_email: docSnap.data().email,
           category: category,
           first_name: firstName,
@@ -146,7 +146,10 @@ function saveAssignments() {
     "mapehEmail",
     "clveEmail",
     "hrEmail",
+    "gradeschoolEmail", 
+    "HsshshEmail", 
     "laboratoryEmail",
+    "cashierEmail",
     "registrarEmail",
     "guidanceEmail",
     "clinicEmail",
@@ -181,7 +184,10 @@ function getAssignedEmail(category) {
     "Christian Living and Values Education": "clveEmail",
 
     "Human Resources": "hrEmail",
+    "Grade School Library":"gradeschoolEmail",
+    "High School and Senior High School Library":"HsshshEmail"
     "Laboratory": "laboratoryEmail",
+    "Cashier":"cashierEmail"
     "Registrar": "registrarEmail",
     "Guidance Office": "guidanceEmail",
     "School Clinic": "clinicEmail",
@@ -208,3 +214,4 @@ function redirectThankYou() {
     window.location.href = "personnel-thankyou.html";
   }
 }
+

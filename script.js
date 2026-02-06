@@ -214,4 +214,11 @@ function redirectThankYou() {
     window.location.href = "personnel-thankyou.html";
   }
 }
+window.goToIndex = goToIndex;
+window.goToAdminLogin = goToAdminLogin;
+window.goToStudentLogin = goToStudentLogin;
+window.goToPersonnelLogin = goToPersonnelLogin;
+window.goStudentHome = goStudentHome;
+window.goPersonnelHome = goPersonnelHome;
+
 

@@ -14,19 +14,17 @@
 
 <form onsubmit="submitIssue(event)">
     <!-- SUBJECT DROPDOWN -->
-  <select required>
+  <select id="services" required>
     <option value="" disabled selected>Select Services or Facilities</option>
     <option>Grade School Library</option>
-    <option>High School Library</option>
-    <option>Senior High School Library</option>
-    <option>Grade School Laboratory</option>
-    <option>Biology Laboratory</option>
-    <option>Chemistry Laboratory</option>
-    <option>Physics Laboratory</option>
-    <option>Computer Laboratory</option>
+    <option>High School and Senior High School Library</option>
+    <option>Laboratory</option>
+    <option>Cashier</option>
+    <option>Registar</option>
+    <option>Guidance Office</option>
     <option>School Clinic</option>
     <option>School Canteen</option>
-  <input placeholder="LRN" required>
+    </select>
   <input id="firstName" type="text" placeholder="First Name" required>
   <input id="lastName" type="text" placeholder="Last Name" required>
   <input id="email" type="email" placeholder="Email" required>
@@ -43,5 +41,6 @@
 </body>
 
 </html>
+
 
 

@@ -96,7 +96,6 @@ function getAssignedEmail(category) {
 /* =========================
    SUBMIT ISSUE (NO FIREBASE STORAGE)
 ========================= */
-
 async function submitIssue(event) {
   event.preventDefault();
 
@@ -108,21 +107,17 @@ async function submitIssue(event) {
 
   let assignedEmail = null;
 
-// Academic / Services / Discipline dropdown
+  // Academic / Services / Discipline routing
   if (subjectSelect) {
-  assignedEmail = assignments[subjectSelect.options[subjectSelect.selectedIndex].text];
+    const selectedText =
+      subjectSelect.options[subjectSelect.selectedIndex].text;
+    assignedEmail = assignments[selectedText];
   } else {
-  assignedEmail = assignments["Human Resources"]; // fallback
-}
-
-if (!assignedEmail) {
-  alert("No assigned email found for this category.");
-  return;
-}
-
+    assignedEmail = assignments["Human Resources"]; // fallback
+  }
 
   if (!assignedEmail) {
-    alert("No assigned personnel found.");
+    alert("No assigned email found for this category.");
     return;
   }
 
@@ -141,37 +136,42 @@ if (!assignedEmail) {
 
   const params = {
     to_email: assignedEmail,
-    full_name: form.querySelectorAll("input")[0].value + " " +
-               form.querySelectorAll("input")[1].value,
-    sender_email: form.querySelector("input[type='email']")?.value || "N/A",
-    category: subjectSelect ? subjectSelect.value.toUpperCase() : "OTHER",
+    full_name:
+      form.querySelectorAll("input")[0].value +
+      " " +
+      form.querySelectorAll("input")[1].value,
+    sender_email:
+      form.querySelector("input[type='email']")?.value || "N/A",
+    category: subjectSelect
+      ? subjectSelect.value.toUpperCase()
+      : "OTHER",
     message: form.querySelector("textarea").value,
     attachment: attachment
-   console.log("Sending email to:", assignedEmail);
-   console.log("Email params:", params);
   };
 
-console.log("Sending email to:", assignedEmail);
-console.log("Email params:", params);
+  // ✅ DEBUG (this is correct placement)
+  console.log("Sending email to:", assignedEmail);
+  console.log("Email params:", params);
 
-  emailjs.send(
-    "service_9uy34u8",
-    "template_0vqldng",
-    params
-  ).then(() => {
-  const isStudent = location.pathname.includes("student");
-  window.location.href = isStudent
-    ? "student-thankyou.html"
-    : "personnel-thankyou.html";
-})
-  }).catch(err => {
-  console.error(err);
-  alert("Email failed, but your report was recorded.");
+  emailjs
+    .send("service_9uy34u8", "template_0vqldng", params)
+    .then(() => {
+      const isStudent = location.pathname.includes("student");
+      window.location.href = isStudent
+        ? "student-thankyou.html"
+        : "personnel-thankyou.html";
+    })
+    .catch(err => {
+      console.error(err);
+      alert("Email failed, but your report was recorded.");
 
-  const isStudent = location.pathname.includes("student");
-  window.location.href = isStudent
-    ? "student-thankyou.html"
-    : "personnel-thankyou.html";
+      const isStudent = location.pathname.includes("student");
+      window.location.href = isStudent
+        ? "student-thankyou.html"
+        : "personnel-thankyou.html";
+    });
+}
+
 });
 }
 
@@ -250,6 +250,7 @@ function readFileAsBase64(file) {
     reader.readAsDataURL(file);
   });
 }
+
 
 
 

@@ -91,7 +91,6 @@ function goToIndex() {
   window.location.href = "index.html";
 }
 
-
 import { db } from "./firebase.js";
 import { doc, getDoc } from 
 "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
@@ -173,33 +172,34 @@ function saveAssignments() {
 
 function getAssignedEmail(category) {
   const map = {
-    "English": "englishEmail",
-    "Mathematics": "mathEmail",
-    "Science": "scienceEmail",
-    "Filipino": "filipinoEmail",
-    "Araling Panlipunan": "apEmail",
-    "Technology and Livelihood Education": "tleEmail",
-    "Reading": "readingEmail",
-    "MAPEH": "mapehEmail",
-    "Christian Living and Values Education": "clveEmail",
+  "English": "englishEmail",
+  "Mathematics": "mathEmail",
+  "Science": "scienceEmail",
+  "Filipino": "filipinoEmail",
+  "Araling Panlipunan": "apEmail",
+  "Technology and Livelihood Education": "tleEmail",
+  "Reading": "readingEmail",
+  "MAPEH": "mapehEmail",
+  "Christian Living and Values Education": "clveEmail",
 
-    "Human Resources": "hrEmail",
-    "Grade School Library":"gradeschoolEmail",
-    "High School and Senior High School Library":"HsshshEmail"
-    "Laboratory": "laboratoryEmail",
-    "Cashier":"cashierEmail"
-    "Registrar": "registrarEmail",
-    "Guidance Office": "guidanceEmail",
-    "School Clinic": "clinicEmail",
-    "School Canteen": "canteenEmail",
+  "Human Resources": "hrEmail",
+  "Grade School Library": "gradeschoolEmail",
+  "High School and Senior High School Library": "HsshshEmail",
+  "Laboratory": "laboratoryEmail",
+  "Cashier": "cashierEmail",
+  "Registrar": "registrarEmail",
+  "Guidance Office": "guidanceEmail",
+  "School Clinic": "clinicEmail",
+  "School Canteen": "canteenEmail",
 
-    "Grade School Level": "disciplineGS",
-    "High School Level": "disciplineHS",
-    "Senior High School Level": "disciplineSHS",
+  "Grade School Level": "disciplineGS",
+  "High School Level": "disciplineHS",
+  "Senior High School Level": "disciplineSHS",
 
-    "Safety - DRRMO": "drrmoEmail",
-    "Safety - General Services": "gsEmail"
-  };
+  "Safety - DRRMO": "drrmoEmail",
+  "Safety - General Services": "gsEmail"
+};
+
 
   const key = map[category];
   return key ? localStorage.getItem(key) : null;
@@ -220,5 +220,6 @@ window.goToStudentLogin = goToStudentLogin;
 window.goToPersonnelLogin = goToPersonnelLogin;
 window.goStudentHome = goStudentHome;
 window.goPersonnelHome = goPersonnelHome;
+
 
 

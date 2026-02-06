@@ -97,26 +97,59 @@ function getAssignedEmail(category) {
    SUBMIT ISSUE (NO FIREBASE STORAGE)
 ========================= */
 
-function submitIssue(event) {
+async function submitIssue(event) {
   event.preventDefault();
 
-  const category = document.getElementById("service").value;
-  const toEmail = getAssignedEmail(category);
+  const form = event.target;
+  const fileInput = form.querySelector("input[type='file']");
+  const subjectSelect = form.querySelector("#subject");
 
-  if (!toEmail) {
-    alert("No assigned email for this category.");
+  let assignedEmail = localStorage.getItem("hr_email");
+
+  if (subjectSelect) {
+    assignedEmail = localStorage.getItem(`${subjectSelect.value}_email`);
+  }
+
+  if (!assignedEmail) {
+    alert("No assigned personnel found.");
     return;
   }
 
-  emailjs.sendForm(
+  let attachment = "No attachment";
+
+  if (fileInput && fileInput.files.length > 0) {
+    const file = fileInput.files[0];
+
+    if (file.size > 5 * 1024 * 1024) {
+      alert("File must be under 5MB.");
+      return;
+    }
+
+    attachment = await readFileAsBase64(file);
+  }
+
+  const params = {
+    to_email: assignedEmail,
+    full_name: form.querySelectorAll("input")[0].value + " " +
+               form.querySelectorAll("input")[1].value,
+    sender_email: form.querySelector("input[type='email']")?.value || "N/A",
+    category: subjectSelect ? subjectSelect.value.toUpperCase() : "OTHER",
+    message: form.querySelector("textarea").value,
+    attachment: attachment
+  };
+
+  emailjs.send(
     "service_9uy34u8",
-    "template_0vqldng",
-    event.target,
-    "xjCLN6pfkwHRa0yIu"
-  )
-  .then(() => redirectThankYou())
-  .catch(() => alert("Failed to send email."));
+    "YOUR_ISSUE_TEMPLATE_ID",
+    params
+  ).then(() => {
+    window.location.href = "student-thankyou.html";
+  }).catch(err => {
+    console.error(err);
+    alert("Email failed to send.");
+  });
 }
+
 
 /* =========================
    THANK YOU REDIRECT
@@ -144,6 +177,45 @@ window.goToAdminLogin = goToAdminLogin;
 window.saveAssignments = saveAssignments;
 window.submitIssue = submitIssue;
 
+
+// Auto-save admin assignments
+document.querySelectorAll("[data-key]").forEach(input => {
+  const key = input.dataset.key;
+
+  // Load saved value
+  if (localStorage.getItem(key)) {
+    input.value = localStorage.getItem(key);
+  }
+
+  // Save on typing
+  input.addEventListener("input", () => {
+    localStorage.setItem(key, input.value);
+  });
+});
+
+
+function sendAssignments(event) {
+  event.preventDefault();
+
+  const data = {};
+
+  document.querySelectorAll("[data-key]").forEach(input => {
+    data[input.dataset.key] = input.value;
+  });
+
+  emailjs.send(
+    "service_9uy34u8",
+    "YOUR_ASSIGNMENT_TEMPLATE_ID",
+    data
+  )
+  .then(() => {
+    alert("Assignments saved and emailed successfully!");
+  })
+  .catch(error => {
+    console.error(error);
+    alert("Failed to send assignments.");
+  });
+}
 
 
 

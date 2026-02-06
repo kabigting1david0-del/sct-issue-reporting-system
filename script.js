@@ -97,7 +97,7 @@ import { doc, getDoc } from
 import { getStorage, ref, uploadBytes, getDownloadURL } 
 from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
 
-function submitIssue(event) {
+function submitIssueWithFile(event) {
   event.preventDefault();
 
   const category = document.getElementById("service").value.toLowerCase();
@@ -220,6 +220,7 @@ window.goToStudentLogin = goToStudentLogin;
 window.goToPersonnelLogin = goToPersonnelLogin;
 window.goStudentHome = goStudentHome;
 window.goPersonnelHome = goPersonnelHome;
+
 
 
 

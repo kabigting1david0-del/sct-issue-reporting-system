@@ -140,7 +140,7 @@ async function submitIssue(event) {
 
   emailjs.send(
     "service_9uy34u8",
-    "YOUR_ISSUE_TEMPLATE_ID",
+    "template_0vqldng",
     params
   ).then(() => {
     window.location.href = "student-thankyou.html";
@@ -214,6 +214,15 @@ function sendAssignments(event) {
   .catch(error => {
     console.error(error);
     alert("Failed to send assignments.");
+  });
+}
+
+function readFileAsBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
   });
 }
 

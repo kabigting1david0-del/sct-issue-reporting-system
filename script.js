@@ -221,6 +221,38 @@ window.goToPersonnelLogin = goToPersonnelLogin;
 window.goStudentHome = goStudentHome;
 window.goPersonnelHome = goPersonnelHome;
 
+function submitAcademicIssue(event) {
+  event.preventDefault();
+
+  const firstName = document.getElementById("firstName").value;
+  const lastName = document.getElementById("lastName").value;
+  const email = document.getElementById("email").value;
+  const subjectKey = document.getElementById("subject").value;
+  const message = document.getElementById("message").value;
+
+  const assignments = JSON.parse(localStorage.getItem("academicAssignments"));
+
+  if (!assignments || !assignments[subjectKey]) {
+    alert("No assigned email for this subject.");
+    return;
+  }
+
+  emailjs.send("SERVICE_ID", "TEMPLATE_ID", {
+    to_email: assignments[subjectKey],
+    first_name: firstName,
+    last_name: lastName,
+    email: email,
+    subject: subjectKey,
+    message: message
+  })
+  .then(() => {
+    window.location.href = "student-thankyou.html";
+  })
+  .catch(() => {
+    alert("Failed to send email.");
+  });
+}
+
 
 
 

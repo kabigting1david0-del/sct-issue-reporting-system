@@ -21,19 +21,36 @@ function loginAdmin() {
 function submitIssue(event) {
   event.preventDefault();
 
-  // Detect which page submitted the form
-  const page = window.location.pathname;
+  const form = event.target;
+  const select = form.querySelector("select");
+  const textarea = form.querySelector("textarea");
 
-  if (page.includes("student")) {
-    window.location.href = "student-thankyou.html";
-  } 
-  else if (page.includes("personnel")) {
-    window.location.href = "personnel-thankyou.html";
+  if (!select || !textarea) {
+    alert("Form error.");
+    return;
   }
-  else {
-    alert("Submission error: page not recognized.");
+
+  const category = select.value;
+  const toEmail = getAssignedEmail(category);
+
+  if (!toEmail) {
+    alert("No assigned personnel for this category.");
+    return;
   }
+
+  emailjs.sendForm(
+    "service_9uy34u8",
+    "template_0vqldng",
+    form,
+    "xjCLN6pfkwHRa0yIu"
+  ).then(() => {
+    redirectThankYou();
+  }).catch(error => {
+    console.error(error);
+    alert("Email failed to send.");
+  });
 }
+
 /* =========================
    STUDENT NAVIGATION
 ========================= */
@@ -115,4 +132,79 @@ function submitIssue(event) {
       window.location.href = "personnel-thankyou.html";
     })
     .catch(err => alert(err));
+}
+
+function saveAssignments() {
+  const fields = [
+    "englishEmail",
+    "mathEmail",
+    "scienceEmail",
+    "filipinoEmail",
+    "apEmail",
+    "tleEmail",
+    "readingEmail",
+    "mapehEmail",
+    "clveEmail",
+    "hrEmail",
+    "laboratoryEmail",
+    "registrarEmail",
+    "guidanceEmail",
+    "clinicEmail",
+    "canteenEmail",
+    "drrmoEmail",
+    "gsEmail",
+    "disciplineGS",
+    "disciplineHS",
+    "disciplineSHS"
+  ];
+
+  fields.forEach(id => {
+    const input = document.getElementById(id);
+    if (input) {
+      localStorage.setItem(id, input.value);
+    }
+  });
+
+  alert("Email assignments saved successfully.");
+}
+
+function getAssignedEmail(category) {
+  const map = {
+    "English": "englishEmail",
+    "Mathematics": "mathEmail",
+    "Science": "scienceEmail",
+    "Filipino": "filipinoEmail",
+    "Araling Panlipunan": "apEmail",
+    "Technology and Livelihood Education": "tleEmail",
+    "Reading": "readingEmail",
+    "MAPEH": "mapehEmail",
+    "Christian Living and Values Education": "clveEmail",
+
+    "Human Resources": "hrEmail",
+    "Laboratory": "laboratoryEmail",
+    "Registrar": "registrarEmail",
+    "Guidance Office": "guidanceEmail",
+    "School Clinic": "clinicEmail",
+    "School Canteen": "canteenEmail",
+
+    "Grade School Level": "disciplineGS",
+    "High School Level": "disciplineHS",
+    "Senior High School Level": "disciplineSHS",
+
+    "Safety - DRRMO": "drrmoEmail",
+    "Safety - General Services": "gsEmail"
+  };
+
+  const key = map[category];
+  return key ? localStorage.getItem(key) : null;
+}
+
+function redirectThankYou() {
+  const path = window.location.pathname;
+
+  if (path.includes("student-")) {
+    window.location.href = "student-thankyou.html";
+  } else if (path.includes("personnel-")) {
+    window.location.href = "personnel-thankyou.html";
+  }
 }

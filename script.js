@@ -147,18 +147,32 @@ if (!assignedEmail) {
     category: subjectSelect ? subjectSelect.value.toUpperCase() : "OTHER",
     message: form.querySelector("textarea").value,
     attachment: attachment
+   console.log("Sending email to:", assignedEmail);
+   console.log("Email params:", params);
   };
+
+console.log("Sending email to:", assignedEmail);
+console.log("Email params:", params);
 
   emailjs.send(
     "service_9uy34u8",
     "template_0vqldng",
     params
   ).then(() => {
-    window.location.href = "student-thankyou.html";
+  const isStudent = location.pathname.includes("student");
+  window.location.href = isStudent
+    ? "student-thankyou.html"
+    : "personnel-thankyou.html";
+})
   }).catch(err => {
-    console.error(err);
-    alert("Email failed to send.");
-  });
+  console.error(err);
+  alert("Email failed, but your report was recorded.");
+
+  const isStudent = location.pathname.includes("student");
+  window.location.href = isStudent
+    ? "student-thankyou.html"
+    : "personnel-thankyou.html";
+});
 }
 
 
@@ -236,6 +250,7 @@ function readFileAsBase64(file) {
     reader.readAsDataURL(file);
   });
 }
+
 
 
 

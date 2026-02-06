@@ -136,29 +136,43 @@ function submitIssueWithFile(event) {
 function saveAssignments() {
   const fields = [
     "englishEmail",
+    "apEmail",
     "mathEmail",
     "scienceEmail",
     "filipinoEmail",
-    "apEmail",
     "tleEmail",
     "readingEmail",
     "mapehEmail",
     "clveEmail",
+
     "hrEmail",
-    "gradeschoolEmail", 
-    "HsshshEmail", 
+    "gradeschoolEmail",
+    "HsshshEmail",
     "laboratoryEmail",
     "cashierEmail",
     "registrarEmail",
     "guidanceEmail",
     "clinicEmail",
     "canteenEmail",
+
     "drrmoEmail",
     "gsEmail",
+
     "disciplineGS",
     "disciplineHS",
     "disciplineSHS"
   ];
+
+  fields.forEach(id => {
+    const input = document.getElementById(id);
+    if (input && input.value.trim() !== "") {
+      localStorage.setItem(id, input.value.trim());
+    }
+  });
+
+  alert("Email assignments saved successfully.");
+}
+
 
   fields.forEach(id => {
     const input = document.getElementById(id);
@@ -252,6 +266,7 @@ function submitAcademicIssue(event) {
     alert("Failed to send email.");
   });
 }
+
 
 
 

@@ -104,11 +104,22 @@ async function submitIssue(event) {
   const fileInput = form.querySelector("input[type='file']");
   const subjectSelect = form.querySelector("#subject");
 
-  let assignedEmail = localStorage.getItem("hr_email");
+  const assignments = JSON.parse(localStorage.getItem("emailAssignments")) || {};
 
+  let assignedEmail = null;
+
+// Academic / Services / Discipline dropdown
   if (subjectSelect) {
-    assignedEmail = localStorage.getItem(`${subjectSelect.value}_email`);
-  }
+  assignedEmail = assignments[subjectSelect.options[subjectSelect.selectedIndex].text];
+  } else {
+  assignedEmail = assignments["Human Resources"]; // fallback
+}
+
+if (!assignedEmail) {
+  alert("No assigned email found for this category.");
+  return;
+}
+
 
   if (!assignedEmail) {
     alert("No assigned personnel found.");
@@ -225,6 +236,7 @@ function readFileAsBase64(file) {
     reader.readAsDataURL(file);
   });
 }
+
 
 
 

@@ -205,7 +205,7 @@ function sendAssignments(event) {
 
   emailjs.send(
     "service_9uy34u8",
-    "YOUR_ASSIGNMENT_TEMPLATE_ID",
+    "template_0vqldng",
     data
   )
   .then(() => {
@@ -225,6 +225,7 @@ function readFileAsBase64(file) {
     reader.readAsDataURL(file);
   });
 }
+
 
 
 

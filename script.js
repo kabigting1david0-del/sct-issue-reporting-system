@@ -172,8 +172,6 @@ async function submitIssue(event) {
     });
 }
 
-});
-}
 
 
 /* =========================
@@ -204,20 +202,19 @@ window.submitIssue = submitIssue;
 
 
 // Auto-save admin assignments
-document.querySelectorAll("[data-key]").forEach(input => {
-  const key = input.dataset.key;
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("[data-key]").forEach(input => {
+    const key = input.dataset.key;
 
-  // Load saved value
-  if (localStorage.getItem(key)) {
-    input.value = localStorage.getItem(key);
-  }
+    if (localStorage.getItem(key)) {
+      input.value = localStorage.getItem(key);
+    }
 
-  // Save on typing
-  input.addEventListener("input", () => {
-    localStorage.setItem(key, input.value);
+    input.addEventListener("input", () => {
+      localStorage.setItem(key, input.value);
+    });
   });
 });
-
 
 function sendAssignments(event) {
   event.preventDefault();
@@ -231,7 +228,7 @@ function sendAssignments(event) {
 emailjs.send(
   "service_9uy34u8",
   "template_0vqldng",
-  params
+    data
 )
 .then(() => {
   const isStudent = location.pathname.includes("student");
@@ -248,6 +245,7 @@ emailjs.send(
     ? "student-thankyou.html"
     : "personnel-thankyou.html";
 });
+}
 
 
 function readFileAsBase64(file) {
@@ -258,14 +256,3 @@ function readFileAsBase64(file) {
     reader.readAsDataURL(file);
   });
 }
-
-
-
-
-
-
-
-
-
-
-

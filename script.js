@@ -86,6 +86,50 @@ function saveAssignments() {
   alert("Assignments (names and emails) saved successfully.");
 }
 
+function loadAssignments() {
+  const assignments = JSON.parse(localStorage.getItem("emailAssignments"));
+
+  if (!assignments) return;
+
+  const map = {
+    "English": { name: "englishName", email: "englishEmail" },
+    "Mathematics": { name: "mathName", email: "mathEmail" },
+    "Science": { name: "scienceName", email: "scienceEmail" },
+    "Filipino": { name: "filipinoName", email: "filipinoEmail" },
+    "Araling Panlipunan": { name: "apName", email: "apEmail" },
+    "Technology and Livelihood Education": { name: "tleName", email: "tleEmail" },
+    "Reading": { name: "readingName", email: "readingEmail" },
+    "MAPEH": { name: "mapehName", email: "mapehEmail" },
+    "Christian Living and Values Education": { name: "clveName", email: "clveEmail" },
+
+    "Human Resources": { name: "hrName", email: "hrEmail" },
+    "Grade School Library": { name: "gradeschoolName", email: "gradeschoolEmail" },
+    "High School and Senior High School Library": { name: "HsshshsName", email: "HsshshEmail" },
+    "Laboratory": { name: "laboratoryName", email: "laboratoryEmail" },
+    "Cashier": { name: "cashierName", email: "cashierEmail" },
+    "Registrar": { name: "registrarName", email: "registrarEmail" },
+    "Guidance Office": { name: "guidanceName", email: "guidanceEmail" },
+    "School Clinic": { name: "clinicName", email: "clinicEmail" },
+    "School Canteen": { name: "canteenName", email: "canteenEmail" },
+
+    "Grade School Level": { name: "disciplineGSName", email: "disciplineGS" },
+    "High School Level": { name: "disciplineHSName", email: "disciplineHS" },
+    "Senior High School Level": { name: "disciplineSHSName", email: "disciplineSHS" }
+  };
+
+  for (const category in assignments) {
+    const entry = assignments[category];
+    const fields = map[category];
+
+    if (!fields) continue;
+
+    const nameInput = document.getElementById(fields.name);
+    const emailInput = document.getElementById(fields.email);
+
+    if (nameInput) nameInput.value = entry.name || "";
+    if (emailInput) emailInput.value = entry.email || "";
+  }
+}
 
 /* =========================
    GET ASSIGNED EMAIL
@@ -259,6 +303,9 @@ function readFileAsBase64(file) {
 }
 
 if (location.pathname.includes("admin-dashboard"))
+
+console.log(localStorage.getItem("emailAssignments"));
+
 
 
 

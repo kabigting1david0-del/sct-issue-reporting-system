@@ -152,33 +152,33 @@ async function submitIssue(event) {
 
   const assignments = JSON.parse(localStorage.getItem("emailAssignments")) || {};
 
-let assignedEmail = null;
-let assignedName = null;
-let selectedText = "OTHER";
+  let assignedEmail = null;
+  let assignedName = null;
+  let selectedText = "OTHER";
 
-if (subjectSelect) {
-  selectedText =
-    subjectSelect.options[subjectSelect.selectedIndex].text;
+  if (subjectSelect) {
+    selectedText =
+      subjectSelect.options[subjectSelect.selectedIndex].text;
 
-  const assignedPerson = assignments[selectedText];
+    const assignedPerson = assignments[selectedText];
 
-  if (!assignedPerson) {
-    alert("No assigned personnel found for this category.");
-    return;
-  }
+    if (!assignedPerson) {
+      alert("No assigned personnel found for this category.");
+      return;
+    }
 
-  assignedEmail = assignedPerson.email;
-  assignedName = assignedPerson.name;
-}
-
-const assignedEmail = assignedPerson.email;
-const assignedName = assignedPerson.name;
+    assignedEmail = assignedPerson.email;
+    assignedName = assignedPerson.name;
   } else {
-    assignedEmail = assignments["Human Resources"]; // fallback
+    const fallback = assignments["Human Resources"];
+    if (fallback) {
+      assignedEmail = fallback.email;
+      assignedName = fallback.name;
+    }
   }
 
   if (!assignedEmail) {
-    alert("No assigned email found for this category.");
+    alert("No assigned email found.");
     return;
   }
 
@@ -196,21 +196,19 @@ const assignedName = assignedPerson.name;
   }
 
   const params = {
-  to_email: assignedEmail,
-  assigned_name: assignedName,
-  full_name:
-    form.querySelectorAll("input")[0].value +
-    " " +
-    form.querySelectorAll("input")[1].value,
-  sender_email:
-    form.querySelector("input[type='email']")?.value || "N/A",
-  category: selectedText,
-  message: form.querySelector("textarea").value,
-  attachment: attachment
-};
+    to_email: assignedEmail,
+    assigned_name: assignedName,
+    full_name:
+      form.querySelectorAll("input")[0].value +
+      " " +
+      form.querySelectorAll("input")[1].value,
+    sender_email:
+      form.querySelector("input[type='email']")?.value || "N/A",
+    category: selectedText,
+    message: form.querySelector("textarea").value,
+    attachment: attachment
+  };
 
-
-  // ✅ DEBUG (this is correct placement)
   console.log("Sending email to:", assignedEmail);
   console.log("Email params:", params);
 
@@ -224,7 +222,7 @@ const assignedName = assignedPerson.name;
     })
     .catch(err => {
       console.error(err);
-      alert("Email failed, but your report was recorded.");
+      alert("Email failed.");
 
       const isStudent = location.pathname.includes("student");
       window.location.href = isStudent
@@ -232,9 +230,6 @@ const assignedName = assignedPerson.name;
         : "personnel-thankyou.html";
     });
 }
-
-
-
 /* =========================
    THANK YOU REDIRECT
 ========================= */
@@ -302,9 +297,11 @@ function readFileAsBase64(file) {
   });
 }
 
-if (location.pathname.includes("admin-dashboard"))
+if (location.pathname.includes("admin-dashboard")) {
+  loadAssignments();
+}
 
-console.log(localStorage.getItem("emailAssignments"));
+
 
 
 

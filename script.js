@@ -200,22 +200,6 @@ window.goToAdminLogin = goToAdminLogin;
 window.saveAssignments = saveAssignments;
 window.submitIssue = submitIssue;
 
-
-// Auto-save admin assignments
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll("[data-key]").forEach(input => {
-    const key = input.dataset.key;
-
-    if (localStorage.getItem(key)) {
-      input.value = localStorage.getItem(key);
-    }
-
-    input.addEventListener("input", () => {
-      localStorage.setItem(key, input.value);
-    });
-  });
-});
-
 function sendAssignments(event) {
   event.preventDefault();
 
@@ -256,3 +240,4 @@ function readFileAsBase64(file) {
     reader.readAsDataURL(file);
   });
 }
+

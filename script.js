@@ -251,4 +251,8 @@ function readFileAsBase64(file) {
   });
 }
 
+if (location.pathname.includes("admin-dashboard")) {
+  loadAssignments();
+}
 
+console.log("EmailJS data:", data);

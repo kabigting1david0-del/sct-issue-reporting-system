@@ -43,46 +43,49 @@ function goToAdminLogin() {
 
 function saveAssignments() {
   const map = {
-    "English": "englishEmail",
-    "Mathematics": "mathEmail",
-    "Science": "scienceEmail",
-    "Filipino": "filipinoEmail",
-    "Araling Panlipunan": "apEmail",
-    "Technology and Livelihood Education": "tleEmail",
-    "Reading": "readingEmail",
-    "MAPEH": "mapehEmail",
-    "Christian Living and Values Education": "clveEmail",
+    "English": { name: "englishName", email: "englishEmail" },
+    "Mathematics": { name: "mathName", email: "mathEmail" },
+    "Science": { name: "scienceName", email: "scienceEmail" },
+    "Filipino": { name: "filipinoName", email: "filipinoEmail" },
+    "Araling Panlipunan": { name: "apName", email: "apEmail" },
+    "Technology and Livelihood Education": { name: "tleName", email: "tleEmail" },
+    "Reading": { name: "readingName", email: "readingEmail" },
+    "MAPEH": { name: "mapehName", email: "mapehEmail" },
+    "Christian Living and Values Education": { name: "clveName", email: "clveEmail" },
 
-    "Human Resources": "hrEmail",
-    "Grade School Library": "gradeschoolEmail",
-    "High School and Senior High School Library": "HsshshEmail",
-    "Laboratory": "laboratoryEmail",
-    "Cashier": "cashierEmail",
-    "Registrar": "registrarEmail",
-    "Guidance Office": "guidanceEmail",
-    "School Clinic": "clinicEmail",
-    "School Canteen": "canteenEmail",
+    "Human Resources": { name: "hrName", email: "hrEmail" },
+    "Grade School Library": { name: "gradeschoolName", email:"gradeschoolEmail" },
+    "High School and Senior High School Library": {name:"HsshshsName", email:"HsshshEmail" },
+    "Laboratory": { name: "laboratoryName", email: "laboratoryEmail" },
+    "Cashier": { name: "cashierName", email: "cashierEmail" },
+    "Registrar": { name: "registrarName", email: "registrarEmail" },
+    "Guidance Office": { name: "guidanceName", email: "guidanceEmail" },
+    "School Clinic": { name: "clinicName", email: "clinicEmail" },
+    "School Canteen": { name: "canteenName", email: "canteenEmail" },
 
-    "Safety - DRRMO": "drrmoEmail",
-    "Safety - General Services": "gsEmail",
-
-    "Grade School Level": "disciplineGS",
-    "High School Level": "disciplineHS",
-    "Senior High School Level": "disciplineSHS"
+    "Grade School Level": { name: "disciplineGSName", email: "disciplineGS" },
+    "High School Level": { name: "disciplineHSName", email: "disciplineHS" },
+    "Senior High School Level": { name: "disciplineSHSName", email: "disciplineSHS" }
   };
 
   const assignments = {};
 
   for (const key in map) {
-    const input = document.getElementById(map[key]);
-    if (input && input.value.trim() !== "") {
-      assignments[key] = input.value.trim();
+    const nameInput = document.getElementById(map[key].name);
+    const emailInput = document.getElementById(map[key].email);
+
+    if (emailInput && emailInput.value.trim() !== "") {
+      assignments[key] = {
+        name: nameInput ? nameInput.value.trim() : "N/A",
+        email: emailInput.value.trim()
+      };
     }
   }
 
   localStorage.setItem("emailAssignments", JSON.stringify(assignments));
-  alert("Assignments saved successfully.");
+  alert("Assignments (names and emails) saved successfully.");
 }
+
 
 /* =========================
    GET ASSIGNED EMAIL
@@ -111,7 +114,14 @@ async function submitIssue(event) {
   if (subjectSelect) {
     const selectedText =
       subjectSelect.options[subjectSelect.selectedIndex].text;
-    assignedEmail = assignments[selectedText];
+    const assignedPerson = assignments[selectedText];
+if (!assignedPerson) {
+  alert("No assigned personnel found for this category.");
+  return;
+}
+
+const assignedEmail = assignedPerson.email;
+const assignedName = assignedPerson.name;
   } else {
     assignedEmail = assignments["Human Resources"]; // fallback
   }
@@ -135,19 +145,19 @@ async function submitIssue(event) {
   }
 
   const params = {
-    to_email: assignedEmail,
-    full_name:
-      form.querySelectorAll("input")[0].value +
-      " " +
-      form.querySelectorAll("input")[1].value,
-    sender_email:
-      form.querySelector("input[type='email']")?.value || "N/A",
-      category: subjectSelect
-         ? subjectSelect.options[subjectSelect.selectedIndex].text
-         : "OTHER",
-    message: form.querySelector("textarea").value,
-    attachment: attachment
-  };
+  to_email: assignedEmail,
+  assigned_name: assignedName,
+  full_name:
+    form.querySelectorAll("input")[0].value +
+    " " +
+    form.querySelectorAll("input")[1].value,
+  sender_email:
+    form.querySelector("input[type='email']")?.value || "N/A",
+  category: selectedText,
+  message: form.querySelector("textarea").value,
+  attachment: attachment
+};
+
 
   // ✅ DEBUG (this is correct placement)
   console.log("Sending email to:", assignedEmail);
@@ -240,4 +250,5 @@ function readFileAsBase64(file) {
     reader.readAsDataURL(file);
   });
 }
+
 

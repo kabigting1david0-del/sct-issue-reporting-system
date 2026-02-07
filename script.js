@@ -108,16 +108,23 @@ async function submitIssue(event) {
 
   const assignments = JSON.parse(localStorage.getItem("emailAssignments")) || {};
 
-  let assignedEmail = null;
+let assignedEmail = null;
+let assignedName = null;
+let selectedText = "OTHER";
 
-  // Academic / Services / Discipline routing
-  if (subjectSelect) {
-    const selectedText =
-      subjectSelect.options[subjectSelect.selectedIndex].text;
-    const assignedPerson = assignments[selectedText];
-if (!assignedPerson) {
-  alert("No assigned personnel found for this category.");
-  return;
+if (subjectSelect) {
+  selectedText =
+    subjectSelect.options[subjectSelect.selectedIndex].text;
+
+  const assignedPerson = assignments[selectedText];
+
+  if (!assignedPerson) {
+    alert("No assigned personnel found for this category.");
+    return;
+  }
+
+  assignedEmail = assignedPerson.email;
+  assignedName = assignedPerson.name;
 }
 
 const assignedEmail = assignedPerson.email;
@@ -251,8 +258,7 @@ function readFileAsBase64(file) {
   });
 }
 
-if (location.pathname.includes("admin-dashboard")) {
-  loadAssignments();
-}
+if (location.pathname.includes("admin-dashboard"))
 
-console.log("EmailJS data:", data);
+
+

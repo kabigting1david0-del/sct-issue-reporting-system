@@ -142,9 +142,9 @@ async function submitIssue(event) {
       form.querySelectorAll("input")[1].value,
     sender_email:
       form.querySelector("input[type='email']")?.value || "N/A",
-    category: subjectSelect
-      ? subjectSelect.value.toUpperCase()
-      : "OTHER",
+      category: subjectSelect
+         ? subjectSelect.options[subjectSelect.selectedIndex].text
+         : "OTHER",
     message: form.querySelector("textarea").value,
     attachment: attachment
   };
@@ -228,19 +228,27 @@ function sendAssignments(event) {
     data[input.dataset.key] = input.value;
   });
 
-  emailjs.send(
-    "service_9uy34u8",
-    "template_0vqldng",
-    data
-  )
-  .then(() => {
-    alert("Assignments saved and emailed successfully!");
-  })
-  .catch(error => {
-    console.error(error);
-    alert("Failed to send assignments.");
-  });
-}
+emailjs.send(
+  "service_9uy34u8",
+  "template_0vqldng",
+  params
+)
+.then(() => {
+  const isStudent = location.pathname.includes("student");
+  window.location.href = isStudent
+    ? "student-thankyou.html"
+    : "personnel-thankyou.html";
+})
+.catch(err => {
+  console.error(err);
+  alert("Email failed, but your report was recorded.");
+
+  const isStudent = location.pathname.includes("student");
+  window.location.href = isStudent
+    ? "student-thankyou.html"
+    : "personnel-thankyou.html";
+});
+
 
 function readFileAsBase64(file) {
   return new Promise((resolve, reject) => {
@@ -250,6 +258,7 @@ function readFileAsBase64(file) {
     reader.readAsDataURL(file);
   });
 }
+
 
 
 

@@ -43,22 +43,22 @@ function goToAdminLogin() {
 
 function saveAssignments() {
   const map = {
-    English: "englishEmail",
-    Mathematics: "mathEmail",
-    Science: "scienceEmail",
-    Filipino: "filipinoEmail",
+    "English": "englishEmail",
+    "Mathematics": "mathEmail",
+    "Science": "scienceEmail",
+    "Filipino": "filipinoEmail",
     "Araling Panlipunan": "apEmail",
     "Technology and Livelihood Education": "tleEmail",
-    Reading: "readingEmail",
-    MAPEH: "mapehEmail",
+    "Reading": "readingEmail",
+    "MAPEH": "mapehEmail",
     "Christian Living and Values Education": "clveEmail",
 
     "Human Resources": "hrEmail",
     "Grade School Library": "gradeschoolEmail",
     "High School and Senior High School Library": "HsshshEmail",
-    Laboratory: "laboratoryEmail",
-    Cashier: "cashierEmail",
-    Registrar: "registrarEmail",
+    "Laboratory": "laboratoryEmail",
+    "Cashier": "cashierEmail",
+    "Registrar": "registrarEmail",
     "Guidance Office": "guidanceEmail",
     "School Clinic": "clinicEmail",
     "School Canteen": "canteenEmail",
@@ -258,6 +258,7 @@ function readFileAsBase64(file) {
     reader.readAsDataURL(file);
   });
 }
+
 
 
 

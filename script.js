@@ -148,6 +148,8 @@ async function submitIssue(event) {
 
   const form = event.target;
   const fileInput = form.querySelector("input[type='file']");
+
+  const hrOnly = form.querySelector("#hrOnly");
   const subjectSelect =
   form.querySelector("#subject") ||
   form.querySelector("#services") ||
@@ -162,10 +164,15 @@ async function submitIssue(event) {
   let selectedText = "OTHER";
 
   if (subjectSelect) {
-    selectedText =
-      subjectSelect.options[subjectSelect.selectedIndex].text;
+    if (subjectSelect.id === "hrOnly") {
+  selectedText = "Human Resources";
+} else {
+  selectedText =
+    subjectSelect.options[subjectSelect.selectedIndex].text;
+}
 
-    const assignedPerson = assignments[selectedText];
+const assignedPerson = assignments[selectedText];
+
 
     if (!assignedPerson) {
       alert("No assigned personnel found for this category.");
@@ -305,6 +312,7 @@ function readFileAsBase64(file) {
 if (location.pathname.includes("admin-dashboard")) {
   loadAssignments();
 }
+
 
 
 

@@ -14,19 +14,10 @@
 
 <form onsubmit="submitIssue(event)">
  <!-- SUBJECT DROPDOWN -->
-  <select required>
-    <option value="" disabled selected>Select Subject</option>
-    <option>English</option>
-    <option>Science</option>
-    <option>Math</option>
-    <option>Araling Panlipunan</option>
-    <option>Filipino</option>
-    <option>Technology and Livelihood Education</option>
-    <option>Reading</option>
-    <option>MAPEH</option>
-  </select>
-  <input id ="firstname" type="text" placeholder="First Name" required>
-  <input id ="lastname" type="text" placeholder="Last Name" required>
+  <input type="hidden" id="hrOnly" value="Human Resources">
+
+  <input id ="firstName" type="text" placeholder="First Name" required>
+  <input id ="lastName" type="text" placeholder="Last Name" required>
   <input id ="email" type="email" placeholder="Email" required>
   <input type="file" id="attachment" accept="image/*,.pdf">
   <textarea id="message" placeholder="Explain your Issue" required></textarea>
@@ -41,6 +32,7 @@
   
 </body>
 </html>
+
 
 
 

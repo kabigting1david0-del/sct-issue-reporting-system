@@ -148,7 +148,10 @@ async function submitIssue(event) {
 
   const form = event.target;
   const fileInput = form.querySelector("input[type='file']");
-  const subjectSelect = form.querySelector("#subject");
+  const subjectSelect =
+  form.querySelector("#subject") ||
+  form.querySelector("#services");
+
 
   const assignments = JSON.parse(localStorage.getItem("emailAssignments")) || {};
 
@@ -300,6 +303,7 @@ function readFileAsBase64(file) {
 if (location.pathname.includes("admin-dashboard")) {
   loadAssignments();
 }
+
 
 
 

@@ -14,13 +14,15 @@
 
 <form onsubmit="submitIssue(event)">
     <!-- SUBJECT DROPDOWN -->
-  <select required>
+  <select id="discipline" required>
     <option value="" disabled selected>Select Student Level</option>
     <option>Grade School Level</option>
     <option>High School Level</option>
     <option>Senior High School Level</option>
-  <input id ="firstname" type="text" placeholder="First Name" required>
-  <input id ="lastname" type="text" placeholder="Last Name" required>
+  </select>
+  
+  <input id ="firstName" type="text" placeholder="First Name" required>
+  <input id ="lastName" type="text" placeholder="Last Name" required>
   <input id ="email" type="email" placeholder="Email" required>
   <input type="file" id="attachment" accept="image/*,.pdf">
   <textarea id="message" placeholder="Explain your Issue" required></textarea>
@@ -35,6 +37,7 @@
 <script src="script.js"></script>
 </body>
 </html>
+
 
 
 

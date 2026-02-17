@@ -106,7 +106,7 @@ function loadAssignments() {
 
     "Human Resources": { name: "hrName", email: "hrEmail" },
     "Grade School Library": { name: "gradeschoolName", email: "gradeschoolEmail" },
-    "High School and Senior High School Library": { name: "HsshshsName", email: "HsshshEmail" },
+    "High School and Senior High School Library": { name: "HsshshName", email: "HsshshEmail" },
     "Laboratory": { name: "laboratoryName", email: "laboratoryEmail" },
     "Cashier": { name: "cashierName", email: "cashierEmail" },
     "Registrar": { name: "registrarName", email: "registrarEmail" },
@@ -182,7 +182,8 @@ if (location.pathname.includes("safety")) {
     ? "student-thankyou.html"
     : "personnel-thankyou.html";
 
-  return; 
+  return;
+}
 
   let assignedEmail = null;
   let assignedName = null;
@@ -371,6 +372,7 @@ function readFileAsBase64(file) {
 if (location.pathname.includes("admin-dashboard")) {
   loadAssignments();
 }
+
 
 
 

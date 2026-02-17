@@ -242,6 +242,42 @@ const assignedPerson = assignments[selectedText];
         : "personnel-thankyou.html";
     });
 }
+async function sendSafetyEmail(person, form) {
+  const fileInput = form.querySelector("input[type='file']");
+  let attachment = "No attachment";
+
+  if (fileInput && fileInput.files.length > 0) {
+    const file = fileInput.files[0];
+
+    if (file.size > 5 * 1024 * 1024) {
+      alert("File must be under 5MB.");
+      return;
+    }
+
+    attachment = await readFileAsBase64(file);
+  }
+
+  const params = {
+    to_email: person.email,
+    assigned_name: person.name,
+    full_name:
+      form.querySelector("#firstName").value +
+      " " +
+      form.querySelector("#lastName").value,
+    sender_email:
+      form.querySelector("input[type='email']")?.value || "N/A",
+    category: "Safety and Structural",
+    message:
+      "Location: " + (form.querySelector("#location")?.value || "N/A") +
+      "\nRoom: " + (form.querySelector("#roomNumber")?.value || "N/A") +
+      "\n\nDetails:\n" +
+      form.querySelector("textarea").value,
+    attachment: attachment
+  };
+
+  await emailjs.send("service_9uy34u8", "template_0vqldng", params);
+}
+
 /* =========================
    THANK YOU REDIRECT
 ========================= */
@@ -253,6 +289,29 @@ function redirectThankYou() {
     location.href = "personnel-thankyou.html";
   }
 }
+const isSafetyPage = location.pathname.includes("safety");
+
+if (isSafetyPage) {
+  const drrmo = assignments["Disaster Risk Reduction Management Office"];
+  const gs = assignments["General Services"];
+
+  if (!drrmo || !gs) {
+    alert("Safety personnel not assigned in admin dashboard.");
+    return;
+  }
+
+  await sendSafetyEmail(drrmo, form);
+  await sendSafetyEmail(gs, form);
+
+  const isStudent = location.pathname.includes("student");
+  window.location.href = isStudent
+    ? "student-thankyou.html"
+    : "personnel-thankyou.html";
+
+  return; 
+}
+
+
 
 /* =========================
    EXPOSE TO HTML (IMPORTANT)
@@ -312,6 +371,7 @@ function readFileAsBase64(file) {
 if (location.pathname.includes("admin-dashboard")) {
   loadAssignments();
 }
+
 
 
 

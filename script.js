@@ -62,6 +62,8 @@ function saveAssignments() {
     "Guidance Office": { name: "guidanceName", email: "guidanceEmail" },
     "School Clinic": { name: "clinicName", email: "clinicEmail" },
     "School Canteen": { name: "canteenName", email: "canteenEmail" },
+    "Disaster Risk Reduction Management Office": { name:  "drrmoName", email: "drrmoEmail" },
+    "General Services" : { name: "gsName", email: "gsEmail"},
 
     "Grade School Level": { name: "disciplineGSName", email: "disciplineGS" },
     "High School Level": { name: "disciplineHSName", email: "disciplineHS" },
@@ -111,7 +113,9 @@ function loadAssignments() {
     "Guidance Office": { name: "guidanceName", email: "guidanceEmail" },
     "School Clinic": { name: "clinicName", email: "clinicEmail" },
     "School Canteen": { name: "canteenName", email: "canteenEmail" },
-
+    "Disaster Risk Reduction Management Office": { name:  "drrmoName", email: "drrmoEmail" },
+    "General Services" : { name: "gsName", email: "gsEmail"},
+     
     "Grade School Level": { name: "disciplineGSName", email: "disciplineGS" },
     "High School Level": { name: "disciplineHSName", email: "disciplineHS" },
     "Senior High School Level": { name: "disciplineSHSName", email: "disciplineSHS" }
@@ -158,6 +162,27 @@ async function submitIssue(event) {
 
 
   const assignments = JSON.parse(localStorage.getItem("emailAssignments")) || {};
+
+   
+if (location.pathname.includes("safety")) {
+
+  const drrmo = assignments["Disaster Risk Reduction Management Office"];
+  const gs = assignments["General Services"];
+
+  if (!drrmo || !gs) {
+    alert("Safety personnel not assigned in admin dashboard.");
+    return;
+  }
+
+  await sendSafetyEmail(drrmo, form);
+  await sendSafetyEmail(gs, form);
+
+  const isStudent = location.pathname.includes("student");
+  window.location.href = isStudent
+    ? "student-thankyou.html"
+    : "personnel-thankyou.html";
+
+  return; 
 
   let assignedEmail = null;
   let assignedName = null;
@@ -289,33 +314,8 @@ function redirectThankYou() {
     location.href = "personnel-thankyou.html";
   }
 }
-const isSafetyPage = location.pathname.includes("safety");
-
-if (isSafetyPage) {
-  const drrmo = assignments["Disaster Risk Reduction Management Office"];
-  const gs = assignments["General Services"];
-
-  if (!drrmo || !gs) {
-    alert("Safety personnel not assigned in admin dashboard.");
-    return;
-  }
-
-  await sendSafetyEmail(drrmo, form);
-  await sendSafetyEmail(gs, form);
-
-  const isStudent = location.pathname.includes("student");
-  window.location.href = isStudent
-    ? "student-thankyou.html"
-    : "personnel-thankyou.html";
-
-  return; 
-}
 
 
-
-/* =========================
-   EXPOSE TO HTML (IMPORTANT)
-========================= */
 
 window.loginStudent = loginStudent;
 window.loginPersonnel = loginPersonnel;
@@ -371,6 +371,7 @@ function readFileAsBase64(file) {
 if (location.pathname.includes("admin-dashboard")) {
   loadAssignments();
 }
+
 
 
 

@@ -189,13 +189,21 @@ if (location.pathname.includes("safety")) {
   let assignedName = null;
   let selectedText = "OTHER";
 
-  if (subjectSelect) {
-    if (subjectSelect.id === "hrOnly") {
+ 
+if (form.querySelector("#hrOnly")) {
   selectedText = "Human Resources";
-} else {
+}
+
+else if (subjectSelect) {
   selectedText =
     subjectSelect.options[subjectSelect.selectedIndex].text;
 }
+
+
+else {
+  selectedText = "Human Resources";
+}
+
 
 const assignedPerson = assignments[selectedText];
 
@@ -372,6 +380,7 @@ function readFileAsBase64(file) {
 if (location.pathname.includes("admin-dashboard")) {
   loadAssignments();
 }
+
 
 
 

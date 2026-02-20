@@ -186,47 +186,34 @@ if (location.pathname.includes("safety")) {
 }
 
   let assignedEmail = null;
-  let assignedName = null;
-  let selectedText = "OTHER";
+let assignedName = null;
+let selectedText = "";
 
- 
+// HR page
 if (form.querySelector("#hrOnly")) {
   selectedText = "Human Resources";
 }
 
+// Dropdown pages
 else if (subjectSelect) {
   selectedText =
     subjectSelect.options[subjectSelect.selectedIndex].text;
 }
 
-
+// Others page
 else {
   selectedText = "Human Resources";
 }
 
-
 const assignedPerson = assignments[selectedText];
 
+if (!assignedPerson) {
+  alert("No assigned personnel found for this category.");
+  return;
+}
 
-    if (!assignedPerson) {
-      alert("No assigned personnel found for this category.");
-      return;
-    }
-
-    assignedEmail = assignedPerson.email;
-    assignedName = assignedPerson.name;
-  } else {
-    const fallback = assignments["Human Resources"];
-    if (fallback) {
-      assignedEmail = fallback.email;
-      assignedName = fallback.name;
-    }
-  }
-
-  if (!assignedEmail) {
-    alert("No assigned email found.");
-    return;
-  }
+assignedEmail = assignedPerson.email;
+assignedName = assignedPerson.name;
 
   let attachment = "No attachment";
 
@@ -380,6 +367,7 @@ function readFileAsBase64(file) {
 if (location.pathname.includes("admin-dashboard")) {
   loadAssignments();
 }
+
 
 
 
